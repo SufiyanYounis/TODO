@@ -169,7 +169,8 @@ body
   display: flex;
   justify-content: center;
   background-color: #0D0D0D;
-  height: 150px;
+  height: 75px;
+  margin-top: 1.5%;
   
 }
 .Logs

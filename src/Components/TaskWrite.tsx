@@ -1,11 +1,14 @@
 import React from 'react'
 import AddTaskButton from './AddTaskButton';
-
-export const TaskWrite = () => {
+type AddButtonProps = 
+{
+  onAddTotalTask:()=> void
+}
+export const TaskWrite = (props:AddButtonProps) => {
   return (
     <div className='Taskwrite'>
         <input type="text" className='InputText' placeholder='write your next task'/>
-        <AddTaskButton/>
+        <AddTaskButton onAdd={props.onAddTotalTask} />
     </div>
   )
 }

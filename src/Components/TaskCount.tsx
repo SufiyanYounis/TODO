@@ -1,10 +1,15 @@
 import React from 'react'
+type TaskCountProps = 
+{
+  DoneCount:number
+  TotalCount:number
+}
 
-const TaskCount = () => {
+const TaskCount = (props:TaskCountProps) => {
   return (
     <div className='circle-container'>
         <span className='circle-text'>
-            0/0
+            {props.DoneCount}/{props.TotalCount}
         </span>
     </div>
   )
