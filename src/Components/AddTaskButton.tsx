@@ -1,10 +1,9 @@
 import React from 'react'
-import AddTaskButtonSvg from '../assets/Icons/AddTaskButtonSvg'
-
+import PlusButton from "../assets/Icons/PlusButton.svg"
 const AddTaskButton = () => {
   return (
     <button className='addTaskButton'>
-      <AddTaskButtonSvg/>
+      <img src={PlusButton}/>
     </button>
   )
 }

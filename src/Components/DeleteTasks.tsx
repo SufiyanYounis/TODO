@@ -1,9 +1,8 @@
 import React from 'react'
-import DeleteButtonSvg from '../assets/Icons/DeleteButtonSvg'
-
+import DeleteButton from '../assets/Icons/DeleteButton.svg'
 const DeleteTasks = () => {
   return (
-    <DeleteButtonSvg/>
+    <img src={DeleteButton}/>
   )
 }
 

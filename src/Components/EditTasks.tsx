@@ -1,11 +1,11 @@
 import React from 'react'
-import EditButtonSvg from '../assets/Icons/EditButtonSvg';
+import EditButton from '../assets/Icons/EditButton.svg';
 
 
 const EditTasks = () => {
 
   return (
-    <EditButtonSvg/>
+    <img src={EditButton}></img>
   );
 }
 export default EditTasks
