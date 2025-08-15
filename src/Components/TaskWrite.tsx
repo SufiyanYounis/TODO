@@ -1,11 +1,13 @@
 import React from 'react'
-import AddTaskButton from './AddTaskButton';
+import AddTaskButtonSvg from '../assets/Icons/AddTaskButtonSvg';
 
 export const TaskWrite = () => {
   return (
     <div className='Taskwrite'>
         <input type="text" className='InputText' placeholder='write your next task'/>
-        <AddTaskButton/>
+        <button className='addTaskButton'>
+          <AddTaskButtonSvg/>
+        </button>
     </div>
   )
 }

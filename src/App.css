@@ -222,3 +222,13 @@ body
   
   width: 15%;
 }
+
+
+.EditTaskButton
+{
+  cursor: pointer;
+}
+.DeleteTaskButton
+{
+  cursor: pointer;
+}

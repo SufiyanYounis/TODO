@@ -1,16 +1,17 @@
 import React from 'react'
 
 import Checkboxes from './CheckBoxes'
-import Editbutton from "../assets/Icons/EditButton.svg"
-import DeleteButton from "../assets/Icons/DeleteButton.svg"
+//import Editbutton from "../assets/Icons/EditButton.svg"
+import EditTaskButtonSvg from '../assets/Icons/EditTaskButtonSvg'
+import DeleteTaskButtonSvg from '../assets/Icons/DeleteTaskButtonSvg'
 const TaskLogs = () => {
   return (
     <div className='Tasklogs'>
       <div className='Logs'>
         <Checkboxes/>
         <div className='Modify'>
-          <img src={Editbutton}/>
-          <img src={DeleteButton}/>
+          <EditTaskButtonSvg />
+          <DeleteTaskButtonSvg/>
         </div>
       </div>
     </div>
