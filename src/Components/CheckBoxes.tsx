@@ -1,12 +1,12 @@
-import React from 'react'
 type CheckboxProps=
 {
-  onAddDoneTask:()=> void
+  onAddDoneTask:(checked: boolean)=> void
+  handleCheck :()=>void
 }
 const Checkboxes = (props:CheckboxProps) => {
   return (
     <label className="custom-checkbox" >
-    <input type="checkbox" onClick={props.onAddDoneTask} />
+    <input type="checkbox"  onChange={(e)=> props.onAddDoneTask(e.target.checked)} />
     <span className="checkmark"></span>
   </label>
   )
