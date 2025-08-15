@@ -10,6 +10,7 @@ export const TaskWrite = (props:AddButtonProps) => {
     props.onAddTotalTask(text);
     setText(''); 
   };
+
   return (
    
     <div className='Taskwrite'>
@@ -18,6 +19,7 @@ export const TaskWrite = (props:AddButtonProps) => {
         <button className='addTaskButton' onClick={handleAddClick}>
           <AddTaskButtonSvg/>
     </button>
+
     </div>
   )
 }

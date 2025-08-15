@@ -3,7 +3,6 @@ import Checkboxes from "./CheckBoxes";
 import EditTaskButtonSvg from "../assets/icons/EditTaskButtonSvg";
 import DeleteTaskButtonSvg from "../assets/icons/DeleteTaskButtonSvg";
 
-
 //this the the properties of the TaskLogs
 
 type TaskCountProps = {
@@ -14,7 +13,6 @@ type TaskCountProps = {
 };
 
 const TaskLogs = (props: TaskCountProps) => {
-  
   //these are my React Hooks that are use to manage the states of Task Log Components
 
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
@@ -26,33 +24,32 @@ const TaskLogs = (props: TaskCountProps) => {
 
   return (
     <>
-    {/*iterating over each task with their specific id and text */}
+      {/*iterating over each task with their specific id and text */}
       {props.tasks.map((t, i) => (
         <div className="Tasklogs" key={t.id}>
           <div className="Logs">
-
-             {/*Toggling each Checkobx with its index so that only the single checkbox is toggled */}
+            {/*Toggling each Checkobx with its index so that only the single checkbox is toggled */}
 
             <Checkboxes
               onAddDoneTask={(checked) => props.onAddDoneTask(i, checked)}
               handleCheck={handleCheck}
             />
-            { editingIndex === i ? (
-
-              
+            {editingIndex === i ? (
               <input
-
                 className="EditInput"
                 value={draft}
-                onChange={(e) => {setDraft(e.target.value);}}
-                onMouseLeave={()=>{
-                  props.onEditTask(i,draft.trim());
-                  setEditingIndex(null)
+                onChange={(e) => {
+                  setDraft(e.target.value);
+                }}
+                onMouseLeave={() => {
+                  props.onEditTask(i, draft.trim());
+                  setEditingIndex(null);
                 }}
               />
             ) : (
               <span
-                className="TextMessage" key={t.id}
+                className="TextMessage"
+                key={t.id}
                 style={{ textDecoration: Ischecked ? "line-through" : "none" }}
               >
                 {t.text}
