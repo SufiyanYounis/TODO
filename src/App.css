@@ -1,42 +1,234 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+
+body
+{
+  background-color: #0D0D0D;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+#Heading
+{
+  display: flex;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  padding: 12px;
+  
+
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.TODO
+{
+  color: rgb(255, 255, 255);
+  margin-left:2%;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size:2.25em;
+  
+  margin-left: 0.1%;
+  font-weight: bold;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.Bookimg
+{
+  margin-left: 12%;
+  margin-right: 0;
+  
+
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
+.TaskDiv
+{
+  display: flex;
+  align-items: center;
+  justify-content: center;      /* Vertically center items */
+  background-color: #0D0D0D;   /* Or your preferred color */
   padding: 2em;
+  border-radius: 16px;      /* Optional: rounded corners */
+  gap: 2em;
+  margin: 0;
+  
+}
+.MidTaskDiv
+{
+  display: flex;
+  padding: 2.5% 8px;
+  align-items: center;
+  border: 1px solid  #C2B39A;
+  width: 40%;
+  border-radius: 15px;
 }
 
-.read-the-docs {
-  color: #888;
+.task-info {
+  display: flex;
+  flex-direction: column;   /* Stack children vertically */
+  justify-content: center;  /* Center vertically if needed */
+  
+  margin-left: 0;
+  width: 15em;
+  margin-left: 3.5em
+}
+
+
+#MainTaskText {
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 2em;
+  margin-right: 10%;
+  
+  margin-left: 0;
+  
+}
+
+#TaskText {
+  color: white;
+  margin-top: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.5em;
+  
+  margin: 0;
+}
+
+.Taskwrite
+{
+  margin-top: 0;
+  padding: 2em;
+  
+  display: flex;
+  justify-content: center;
+  
+}
+.Message
+{
+  margin-top:2%;
+  display: flex;
+  justify-content: center;
+}
+.Defaultmsg
+{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: large;
+  color: white;
+}
+.addTaskButton
+{
+  /* margin-left: 1%;
+  background-color: green;
+  border: 0cap;
+  padding: 5px 12px;
+  height: 40px;
+  width: 40px;
+  border: none; 
+  border-radius: 5px; */
+  width: 50px;              /* Adjust size as needed */
+  height: 50px;
+  margin-left: 1%;
+  border-radius: 8px;       /* Makes it round */
+  background-color: #88AB33;/* Green background */
+  border: none;             /* No border */
+  color: black;             /* Black + sign */
+  font-size: 4em;          /* Large + sign */
+  font-weight: 100;         /* Thin font */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size:xx-large;
+  cursor: pointer;
+  
+
+}
+.InputText
+{
+  width: 28%;
+  border: none;
+  border-radius: 8px;
+  padding: 16px 14px;
+  background-color: #1F2937;
+}
+
+
+.circle-container {
+  width: 150px; /* Adjust size as needed */
+  height: 150px; /* Must match width for a perfect circle */
+  background-color: #88AB33;
+  border-radius: 50%; /* Makes it a circle */
+  display: flex; /* Enables flexbox for easy centering */
+  justify-content: center; /* Centers horizontally */
+  align-items: center; /* Centers vertically */
+  margin-left:3%;
+}
+
+.circle-text {
+  color: white; /* Text color */
+  font-family: sans-serif; /* Choose a suitable font */
+  font-size: 50px; /* Adjust font size as needed */
+  
+}
+
+
+.Tasklogs
+{
+  display: flex;
+  justify-content: center;
+  background-color: #0D0D0D;
+  height: 150px;
+  
+}
+.Logs
+{
+  width: 40%;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+  border: 2px solid #C2B39A;
+  
+}
+
+
+.custom-checkbox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  
+ 
+  height: 0;
+  width: 0;
+}
+.checkmark {
+  position: relative;
+  display: inline-block;
+  margin-left: 100%;
+  width: 24px; /* Adjust size as needed */
+  height: 24px; /* Adjust size as needed */
+  border-radius: 50%; /* Makes it circular */
+  border: 2px solid #5BC560; /* Border color */
+  background-color: #030000; /* Background color when unchecked */
+}
+.custom-checkbox input:checked ~ .checkmark {
+  background-color: #5BC560; /* Background color when checked */
+  
+ 
+}
+.editTasks
+{
+  color: white;
+  margin-right: 15%;
+}
+.Modify
+{
+  display: flex;
+  justify-content: space-around;
+  
+  
+  width: 15%;
+}
+
+
+.EditTaskButton
+{
+  cursor: pointer;
+}
+.DeleteTaskButton
+{
+  cursor: pointer;
 }
