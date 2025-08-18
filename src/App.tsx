@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import Heading from "./Components/Heading";
 import TaskDone from "./Components/TaskDone";
 import TaskWrite from "./Components/TaskWrite";
@@ -9,13 +9,13 @@ const App = () => {
   //this is a hook to set the tasks
   const [tasks, setTasks] = useState<{ id: number, done: boolean ,text:string}[]>([]);
   //Total task is set equals to the length of task 
-  const TotalTask = tasks.length;
-  //this doneTask is filtered so if the task are done , then they will increment
-  const doneTask = tasks.filter((t) => t.done).length;
+  const totalTask = tasks.length;
+  //this UseMemo is used to optimize
+  const doneTask = useMemo(()=>tasks.reduce((tasksCount,currentTask)=> tasksCount+(currentTask.done?1:0),0),[tasks])
 
   //handlers to handle the states
 
-  const handleTotalTask = (text:string) =>
+  const handletotalTask = (text:string) =>
     setTasks((ts) => [...ts, { id: Date.now(), done: false, text }]);
 
   const handleToggleDone = (index: number, checked: boolean) =>
@@ -32,9 +32,9 @@ const App = () => {
   return (
     <>
       <Heading />
-      <TaskDone DoneCount={doneTask} TotalCount={TotalTask} />
-      <TaskWrite onAddTotalTask={handleTotalTask} />
-      {TotalTask > 0 ? (
+      <TaskDone doneCount={doneTask} totalCount={totalTask} />
+      <TaskWrite onAddTotalTask={handletotalTask} />
+      {totalTask > 0 ? (
         <TaskLogs
           tasks={tasks}
           onAddDoneTask={handleToggleDone}

@@ -6,7 +6,7 @@ import DeleteTaskButtonSvg from "../assets/icons/DeleteTaskButtonSvg";
 //this the the properties of the TaskLogs
 
 type TaskCountProps = {
-  tasks: { id: number; text: string, done:boolean }[];
+  tasks: { id: number; text: string; done: boolean }[];
   onAddDoneTask: (index: number, checked: boolean) => void;
   onDeleteTask: (index: number) => void;
   onEditTask: (index: number, newText: string) => void;
@@ -17,7 +17,6 @@ const TaskLogs = (props: TaskCountProps) => {
 
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
   const [draft, setDraft] = useState("");
- 
 
   return (
     <>
@@ -28,9 +27,8 @@ const TaskLogs = (props: TaskCountProps) => {
             {/*Toggling each Checkobx with its index so that only the single checkbox is toggled */}
 
             <Checkboxes
-            checked={t.done}
+              checked={t.done}
               onAddDoneTask={(checked) => props.onAddDoneTask(i, checked)}
-             
             />
             {editingIndex === i ? (
               <input
@@ -54,13 +52,17 @@ const TaskLogs = (props: TaskCountProps) => {
               </span>
             )}
             <div className="Modify">
-              <EditTaskButtonSvg
-                onEdit={() => {
+              <div
+                onClick={() => {
                   setEditingIndex(i);
                   setDraft(t.text);
                 }}
-              />
-              <DeleteTaskButtonSvg onDelete={() => props.onDeleteTask(i)} />
+              >
+                <EditTaskButtonSvg />
+              </div>
+              <div onClick={() => props.onDeleteTask(i)}>
+                <DeleteTaskButtonSvg />
+              </div>
             </div>
           </div>
         </div>
