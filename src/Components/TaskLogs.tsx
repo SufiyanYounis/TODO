@@ -17,7 +17,7 @@ const TaskLogs = (props: TaskCountProps) => {
 
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
   const [draft, setDraft] = useState("");
-
+ 
 
   return (
     <>
@@ -30,6 +30,7 @@ const TaskLogs = (props: TaskCountProps) => {
             <Checkboxes
             checked={t.done}
               onAddDoneTask={(checked) => props.onAddDoneTask(i, checked)}
+             
             />
             {editingIndex === i ? (
               <input
