@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Checkboxes from "./CheckBoxes";
-import EditTaskButtonSvg from "../assets/Icons/EditTaskButtonSvg";
-import DeleteTaskButtonSvg from "../assets/Icons/DeleteTaskButtonSvg";
+import EditTaskButtonSvg from "../assets/icons/EditTaskButtonSvg";
+import DeleteTaskButtonSvg from "../assets/icons/DeleteTaskButtonSvg";
 
 //this the the properties of the TaskLogs
 
