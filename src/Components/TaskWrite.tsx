@@ -1,16 +1,16 @@
-import React, { useState } from 'react'
+import React, { use, useEffect, useState } from 'react'
 import AddTaskButtonSvg from '../assets/icons/AddTaskButtonSvg';
 type AddButtonProps = 
 {
   onAddTotalTask:(text:string)=> void
 }
 export const TaskWrite = (props:AddButtonProps) => {
-  const [text, setText] = useState('');
+  const [text, setText] = useState("") 
+
   const handleAddClick = () => {
     props.onAddTotalTask(text);
     setText(''); 
   };
-
   return (
    
     <div className='Taskwrite'>

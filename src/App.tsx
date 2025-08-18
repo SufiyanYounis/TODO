@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Heading from "./Components/Heading";
 import TaskDone from "./Components/TaskDone";
 import TaskWrite from "./Components/TaskWrite";
@@ -7,7 +7,17 @@ import Messages from "./Components/Messages";
 import TaskLogs from "./Components/TaskLogs";
 const App = () => {
   //this is a hook to set the tasks
-  const [tasks, setTasks] = useState<{ id: number, done: boolean ,text:string}[]>([]);
+  const [tasks, setTasks] = useState<{ id: number, done: boolean ,text:string}[]>(()=>
+  {
+    const save = localStorage.getItem("task");
+    console.log(save)
+    return save ? JSON.parse(save) : []
+  });
+  //this is a 
+  useEffect(()=>
+  {
+    localStorage.setItem("task",JSON.stringify(tasks));
+  },[tasks])
   //Total task is set equals to the length of task 
   const TotalTask = tasks.length;
   //this doneTask is filtered so if the task are done , then they will increment
