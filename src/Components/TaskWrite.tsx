@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import AddTaskButtonSvg from '../assets/icons/AddTaskButtonSvg';
+import AddTaskButtonSvg from '../assets/Icons/AddTaskButtonSvg';
 type AddButtonProps = 
 {
   onAddTotalTask:(text:string)=> void
