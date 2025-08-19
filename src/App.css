@@ -1,4 +1,3 @@
-
 body
 {
   background-color: #0D0D0D;
@@ -78,6 +77,16 @@ body
   
 }
 
+.TextMessage 
+{
+  color:white;
+  font-family: Arial, Helvetica, sans-serif;
+  position: static;
+  margin-left: 50px;
+  flex: 1;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
 #TaskText {
   color: white;
   margin-top: 0;
@@ -91,7 +100,6 @@ body
 {
   margin-top: 0;
   padding: 2em;
-  
   display: flex;
   justify-content: center;
   
@@ -142,6 +150,7 @@ body
   border-radius: 8px;
   padding: 16px 14px;
   background-color: #1F2937;
+  color: white;
 }
 
 
@@ -169,7 +178,8 @@ body
   display: flex;
   justify-content: center;
   background-color: #0D0D0D;
-  height: 150px;
+  min-height: 75px;
+  margin-top: 1.5%;
   
 }
 .Logs
@@ -188,9 +198,8 @@ body
 .custom-checkbox input {
   position: absolute;
   opacity: 0;
-  cursor: pointer;
+
   
- 
   height: 0;
   width: 0;
 }
@@ -203,6 +212,7 @@ body
   border-radius: 50%; /* Makes it circular */
   border: 2px solid #5BC560; /* Border color */
   background-color: #030000; /* Background color when unchecked */
+  cursor: pointer;
 }
 .custom-checkbox input:checked ~ .checkmark {
   background-color: #5BC560; /* Background color when checked */
@@ -218,17 +228,19 @@ body
 {
   display: flex;
   justify-content: space-around;
-  
-  
+  width: auto;
   width: 15%;
 }
 
 
-.EditTaskButton
-{
-  cursor: pointer;
-}
-.DeleteTaskButton
-{
-  cursor: pointer;
+.EditInput {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  color: white;
+  border-radius: 4px;
+  margin-left: 8%;
+  padding: 4px 8px;
+  outline: none;
 }
