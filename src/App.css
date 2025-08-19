@@ -237,9 +237,10 @@ body
   flex: 1;
   min-width: 0;
   background: transparent;
+  border: none;
   color: white;
-  border: 1px solid #C2B39A;
   border-radius: 4px;
   margin-left: 8%;
   padding: 4px 8px;
+  outline: none;
 }

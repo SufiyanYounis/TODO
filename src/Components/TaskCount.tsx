@@ -1,18 +1,17 @@
-import React from 'react'
-type TaskCountProps = 
-{
-  DoneCount:number
-  TotalCount:number
-}
+import React from "react";
+type TaskCountProps = {
+  doneCount: number;
+  totalCount: number;
+};
 
-const TaskCount = (props:TaskCountProps) => {
+const TaskCount = (props: TaskCountProps) => {
   return (
-    <div className='circle-container'>
-        <span className='circle-text'>
-            {props.DoneCount}/{props.TotalCount}
-        </span>
+    <div className="circle-container">
+      <span className="circle-text">
+        {props.doneCount}/{props.totalCount}
+      </span>
     </div>
-  )
-}
+  );
+};
 
-export default TaskCount
+export default TaskCount;

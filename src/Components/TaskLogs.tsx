@@ -6,7 +6,7 @@ import DeleteTaskButtonSvg from "../assets/icons/DeleteTaskButtonSvg";
 //this the the properties of the TaskLogs
 
 type TaskCountProps = {
-  tasks: { id: number; text: string }[];
+  tasks: { id: number; text: string; done: boolean }[];
   onAddDoneTask: (index: number, checked: boolean) => void;
   onDeleteTask: (index: number) => void;
   onEditTask: (index: number, newText: string) => void;
@@ -16,12 +16,9 @@ const TaskLogs = (props: TaskCountProps) => {
   //these are my React Hooks that are use to manage the states of Task Log Components
 
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
-  const [draft, setDraft] = useState("")
 
-  const [Ischecked, setCheck] = useState(false);
-  const handleCheck = () => {
-    setCheck(!Ischecked);
-  };
+  const [draft, setDraft] = useState("");
+
   return (
     <>
       {/*iterating over each task with their specific id and text */}
@@ -31,8 +28,8 @@ const TaskLogs = (props: TaskCountProps) => {
             {/*Toggling each Checkobx with its index so that only the single checkbox is toggled */}
 
             <Checkboxes
+              checked={t.done}
               onAddDoneTask={(checked) => props.onAddDoneTask(i, checked)}
-              handleCheck={handleCheck}
             />
             {editingIndex === i ? (
               <input
@@ -43,7 +40,7 @@ const TaskLogs = (props: TaskCountProps) => {
                   localStorage.setItem("edit-draft", JSON.stringify(e.target.value));
 
                 }}
-                onMouseLeave={() => {
+                onBlur={() => {
                   props.onEditTask(i, draft.trim());
                   setEditingIndex(null);
                 }}
@@ -52,19 +49,23 @@ const TaskLogs = (props: TaskCountProps) => {
               <span
                 className="TextMessage"
                 key={t.id}
-                style={{ textDecoration: Ischecked ? "line-through" : "none" }}
+                style={{ textDecoration: t.done ? "line-through" : "none" }}
               >
                 {t.text}
               </span>
             )}
             <div className="Modify">
-              <EditTaskButtonSvg
-                onEdit={() => {
+              <div
+                onClick={() => {
                   setEditingIndex(i);
                   setDraft(t.text);
                 }}
-              />
-              <DeleteTaskButtonSvg onDelete={() => props.onDeleteTask(i)} />
+              >
+                <EditTaskButtonSvg />
+              </div>
+              <div onClick={() => props.onDeleteTask(i)}>
+                <DeleteTaskButtonSvg />
+              </div>
             </div>
           </div>
         </div>
