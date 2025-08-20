@@ -45,7 +45,7 @@ const LogIn = () => {
                                 /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
                   })}
                   aria-invalid={!!errors.email}
-                    type="email"
+                    type="text"
                     placeholder="you@example.com"
                     className="w-full rounded-xl bg-white/5 px-4 py-3 text-white placeholder-white/50 outline-none ring-1 ring-white/10 focus:ring-2 focus:ring-lime-400 transition"
                   />
