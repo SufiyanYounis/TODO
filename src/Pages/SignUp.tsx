@@ -98,10 +98,18 @@ const SignUp = () => {
                           <input
                             {...register("email", {
                               required: "email is required",
-                              pattern:
-                                /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                              validate:(v)=>
+                                {
+                                  const strong =
+                                /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]$/
+                                if (!strong.test(v))
+                                {
+                                  return "Email Format is incorrect"
+                                }
+                                return true
+                                },
                             })}
-                            type="email"
+                            type="text"
                             className="w-full rounded-xl bg-white/5 px-4 py-3 text-white placeholder-white/50 outline-none ring-1 ring-white/10 focus:ring-2 focus:ring-[#8aad32] transition"
                             placeholder="you@example.com"
                           />
@@ -190,7 +198,6 @@ const SignUp = () => {
                       </div>
                       <button
                         type="submit"
-                        // className="w-full rounded-xl bg-gradient-to-r text-slate-900 bg-transparent font-medium py-3 shadow-lg shadow-lime-500/10 ring-1 ring-white/10 hover:shadow-lime-500/25 hover:scale-[1.02] hover:border-lime-500 active:scale-[0.99] transition text-stone-50 cursor-pointer"
                         className="bg-neutral-800 border-2 border-transparent w-full rounded-xl font-medium py-3 hover:border-lime-500 text-white px-4 py-2 rounded-lg transition-colors duration-300 ease-in-out"
                       >
                         Create account
