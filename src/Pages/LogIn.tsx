@@ -1,13 +1,8 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm, type SubmitHandler } from 'react-hook-form'
-
-type userLogInSchema =
-{
-  email: string;
-  password: string;
-}
-
+import { userLogInSchema, type userLoginForm } from '../Validation/LogIn'
+import { yupResolver } from '@hookform/resolvers/yup'
 const LogIn = () => {
   const navigate = useNavigate();
 
@@ -15,9 +10,9 @@ const LogIn = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<userLogInSchema>();  
+  } = useForm<userLoginForm>({resolver:yupResolver(userLogInSchema), mode:"onSubmit"});  
   
-  const onsubmit:SubmitHandler<userLogInSchema> =(data)=>
+  const onsubmit:SubmitHandler<userLoginForm> =(data)=>
   {
     console.log(data)
     navigate("/todo");
@@ -39,11 +34,7 @@ const LogIn = () => {
                 <div>
                   <label className="mb-1 block text-sm text-white/80">Email</label>
                   <input
-                  {...register("email",{
-                    required: "Email is required",
-                     pattern:
-                                /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-                  })}
+                  {...register("email")}
                   aria-invalid={!!errors.email}
                     type="text"
                     placeholder="you@example.com"
@@ -54,23 +45,7 @@ const LogIn = () => {
                 <div>
                   <label className="mb-1 block text-sm text-white/80">Password</label>
                   <input
-                  {...register("password",{
-                    required: "Password is required",
-                    validate:(v)=>
-                    {
-                      const strong = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).+$/ 
-                      if (v.length < 8)
-                      {
-                        return "Password length must be atleast 8"
-                      }
-                      else if (! strong.test(v))
-                      {
-                        return "Password must contain 1 uppercase, 1 lowercase and 1 special Character"
-                      }
-                      return true
-
-                    }
-                  })}
+                  {...register("password")}
                   aria-invalid={!!errors.password}
                     type="password"
                     placeholder="••••••••"
