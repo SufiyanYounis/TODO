@@ -35,6 +35,7 @@ const App = () => {
     <Routes>
       <Route
         path="/"
+        index={true}
         element={
           <>
             <Heading />

@@ -24,14 +24,11 @@ const LogIn = () => {
   }
 
   return (
-    <div className="min-h-screen relative overflow-hidden bg-slate-950">
-      {/* Ambient glow blobs */}
-      <div className="pointer-events-none absolute -top-20 -left-20 h-96 w-96 rounded-full bg-gradient-to-br from-lime-400/30 via-emerald-400/20 to-transparent blur-3xl animate-pulse" />
-      <div className="pointer-events-none absolute -bottom-24 -right-24 h-[30rem] w-[30rem] rounded-full bg-gradient-to-tl from-fuchsia-500/20 via-purple-500/20 to-transparent blur-3xl animate-[pulse_6s_ease-in-out_infinite]" />
+    <div className="min-h-screen relative overflow-hidden bg-zinc-950">
 
-      <div className="relative z-10 flex min-h-screen items-center justify-center px-4">
+      <div className="relative z-10 flex min-h-screen items-center justify-center px-4 bg-zinc-950">
         {/* Card with animated gradient border */}
-        <div className="p-[1px] rounded-2xl bg-gradient-to-br from-white/20 via-lime-400/20 to-transparent animate-[pulse_12s_ease-in-out_infinite]">
+        <div className="p-[1px] rounded-2xl bg-zinc-900">
           <div className="w-full max-w-md rounded-2xl border border-white/10 bg-white/10 backdrop-blur-xl shadow-2xl">
             <div className="px-8 pt-8 pb-6">
               <h1 className="text-2xl font-semibold text-white">Welcome back</h1>

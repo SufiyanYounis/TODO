@@ -23,7 +23,7 @@ export const TaskWrite = (props: AddButtonProps) => {
       <button
         className="addTaskButton"
         onClick={handleAddClick}
-        disabled={text.trim() === ""}
+        disabled={text.trim() === "" }
       >
         <AddTaskButtonSvg />
       </button>
