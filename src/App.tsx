@@ -6,9 +6,10 @@ import TaskDone from "./Components/TaskDone";
 import TaskWrite from "./Components/TaskWrite";
 import Messages from "./Components/Messages";
 import TaskLogs from "./Components/TaskLogs";
+type Task = {id: number, done: boolean ,text:string}
 const App = () => {
   //this is a hook to set the tasks
-  const [tasks, setTasks] = useState<{ id: number, done: boolean ,text:string}[]>(()=>
+  const [tasks, setTasks] = useState<Task[]>(()=>
   {
     const save = localStorage.getItem("task");
     console.log(save)
@@ -24,32 +25,61 @@ const App = () => {
   //this UseMemo is used to optimize
   const doneTask = useMemo(()=>tasks.reduce((tasksCount,currentTask)=> tasksCount+(currentTask.done?1:0),0),[tasks])
 
-  //handlers to handle the states
 
-  const handletotalTask = (text:string) =>
-    setTasks((ts) => [...ts, { id: Date.now(), done: false, text }]);
+  const getTasksFromStorage = ():Task[] => {
+    const saved = localStorage.getItem("task");
+    return saved ? JSON.parse(saved) : [];
+  };
 
-  const handleToggleDone = (index: number, checked: boolean) =>
-    setTasks((ts) =>
-      ts.map((t, i) => (i === index ? { ...t, done: checked } : t))
-    );
-
-  const handleDeleteTasks = (index: number) =>
-    setTasks((ts) => ts.filter((_, i) => i !== index));
-
-  const handleEditTask = (index: number, newText: string) =>
-    setTasks((ts) => ts.map((t, i) => (i === index ? { ...t, text: newText } : t)));
+    // Helper: save tasks to LS
+    const saveTasksToStorage = (updated: Task[]) => {
+      localStorage.setItem("task", JSON.stringify(updated));
+      setTasks(updated);
+    };
+  
+    // Add task → append to LS
+    const handleAddTask = (text: string) => {
+      const current = getTasksFromStorage();
+      const newTask = { id: Date.now(), done: false, text };
+      const updated = [...current, newTask];
+      saveTasksToStorage(updated);
+    };
+  
+    // Toggle done by index
+    const handleToggleDone = (index: number) => {
+      const current = getTasksFromStorage();
+      if (current[index]) {
+        current[index].done = !current[index].done;
+        saveTasksToStorage([...current]);
+      }
+    };
+  
+    // Delete by index
+    const handleDeleteTask = (index: number) => {
+      const current = getTasksFromStorage();
+      const updated = current.filter((_, i) => i !== index);
+      saveTasksToStorage(updated);
+    };
+  
+    // Edit text by index
+    const handleEditTask = (index: number, newText: string) => {
+      const current = getTasksFromStorage();
+      if (current[index]) {
+        current[index].text = newText;
+        saveTasksToStorage([...current]);
+      }
+    };
 
   return (
     <>
       <Heading />
       <TaskDone doneCount={doneTask} totalCount={totalTask} />
-      <TaskWrite onAddTotalTask={handletotalTask} />
+      <TaskWrite onAddTotalTask={handleAddTask} />
       {totalTask > 0 ? (
         <TaskLogs
           tasks={tasks}
           onAddDoneTask={handleToggleDone}
-          onDeleteTask={handleDeleteTasks}
+          onDeleteTask={handleDeleteTask}
           onEditTask={handleEditTask}
         />
       ) : (
