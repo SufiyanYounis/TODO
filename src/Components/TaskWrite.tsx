@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import AddTaskButtonSvg from "../assets/icons/AddTaskButtonSvg";
 type AddButtonProps = {
@@ -9,7 +10,6 @@ export const TaskWrite = (props: AddButtonProps) => {
     props.onAddTotalTask(text);
     setText("");
   };
-
   return (
     <div className="Taskwrite">
       <input

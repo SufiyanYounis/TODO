@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState , useEffect} from "react";
 import Checkboxes from "./CheckBoxes";
 import EditTaskButtonSvg from "../assets/icons/EditTaskButtonSvg";
 import DeleteTaskButtonSvg from "../assets/icons/DeleteTaskButtonSvg";
@@ -16,6 +16,7 @@ const TaskLogs = (props: TaskCountProps) => {
   //these are my React Hooks that are use to manage the states of Task Log Components
 
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
+
   const [draft, setDraft] = useState("");
 
   return (
@@ -36,6 +37,8 @@ const TaskLogs = (props: TaskCountProps) => {
                 value={draft}
                 onChange={(e) => {
                   setDraft(e.target.value);
+                  localStorage.setItem("edit-draft", JSON.stringify(e.target.value));
+
                 }}
                 onBlur={() => {
                   props.onEditTask(i, draft.trim());

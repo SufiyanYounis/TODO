@@ -23,4 +23,5 @@ const DeleteTaskButtonSvg = () => {
   );
 };
 
+
 export default DeleteTaskButtonSvg;
