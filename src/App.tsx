@@ -1,20 +1,16 @@
 import "./App.css";
 import { useState, useMemo } from "react";
-import { useNavigate, Routes, Route } from "react-router-dom";
-import Heading from "./Components/Heading";
-import TaskDone from "./Components/TaskDone";
+import {Routes, Route } from "react-router-dom";
 import TodoDashboard from "./Pages/TodoDashboard";
 import LogIn from "./Pages/LogIn";
 import SignUp from "./Pages/SignUp";
+import Home from "./Pages/Home";
 
+type Task = { id: number; done: boolean; text: string };
 
-type Task = {id: number, done: boolean ,text:string}
 const App = () => {
-  //this is a hook to set the tasks
-  const [tasks, _] = useState<Task[]>(()=>
-  {
+  const [tasks, setTasks] = useState<Task[]>(() => {
     const save = localStorage.getItem("task");
-    console.log(save);
     return save ? JSON.parse(save) : [];
   });
 
@@ -29,40 +25,75 @@ const App = () => {
       ),
     [tasks]
   );
-  const navigate = useNavigate();
+
+  // Helper: save tasks to LS
+  const saveTasksToStorage = (updated: Task[]) => {
+    localStorage.setItem("task", JSON.stringify(updated));
+    setTasks(updated);
+  };
+
+  // Add task → append to LS
+  const handleAddTask = (text: string) => {
+    const newTask = { id: Date.now(), done: false, text };
+    const updated = [...tasks, newTask];
+    saveTasksToStorage(updated);
+  };
+
+  // Toggle done by index
+  const handleToggleDone = (index: number) => {
+    if (tasks[index]) {
+      tasks[index].done = !tasks[index].done;
+      saveTasksToStorage([...tasks]);
+    }
+  };
+
+  // Delete by index
+  const handleDeleteTask = (index: number) => {
+    const updated = tasks.filter((_, i) => i !== index);
+    saveTasksToStorage(updated);
+  };
+
+  // Edit text by index
+  const handleEditTask = (index: number, newText: string) => {
+    if (tasks[index]) {
+      tasks[index].text = newText;
+      saveTasksToStorage([...tasks]);
+    }
+  };
+
   return (
     <Routes>
+
+      {/* Root path  */}
       <Route
         path="/"
         index={true}
+        element={<Home doneTask={doneTask} totalTask={totalTask} />}
+      />
+      {/* LogIn path  */}
+      <Route path="/login" element={<LogIn />} />
+
+      {/* SignUp path  */}
+      <Route path="/signup" element={<SignUp />} />
+
+      {/* TODO DASHBOARD path  */}
+
+      <Route
+        path="/todo"
         element={
-          <>
-            <Heading />
-            <TaskDone doneCount={doneTask} totalCount={totalTask} />
-            <div className="flex justify-center gap-20">
-              <button
-                className="text-stone-50 bg-[#8aad32] px-8 py-4 rounded-full cursor-pointer"
-                onClick={() => navigate("/login")}
-              >
-                LogIn
-              </button>
-              <button
-                className="text-stone-50 bg-[#8aad32] px-7 py-4 rounded-full cursor-pointer"
-                onClick={() => navigate("/signup")}
-              >
-                SignUp
-              </button>
-            </div>
-          </>
+          <TodoDashboard
+            totalTask={totalTask}
+            doneTask={doneTask}
+            tasks={tasks}
+            handleToggleDone={handleToggleDone}
+            handleAddTask={handleAddTask}
+            handleEditTask={handleEditTask}
+            handleDeleteTask={handleDeleteTask}
+          />
         }
       />
-      <Route path="/login" element={<LogIn />} />
-      <Route path="/signup" element={<SignUp />} />
-      <Route path="/todo" element={<TodoDashboard />} />
     </Routes>
-
   );
 };
-
 
 export default App;

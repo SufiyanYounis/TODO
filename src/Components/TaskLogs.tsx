@@ -7,7 +7,7 @@ import DeleteTaskButtonSvg from "../assets/icons/DeleteTaskButtonSvg";
 
 type TaskCountProps = {
   tasks: { id: number; text: string; done: boolean }[];
-  onAddDoneTask: (index: number, checked: boolean) => void;
+  onDoneTask: (index: number, checked: boolean) => void;
   onDeleteTask: (index: number) => void;
   onEditTask: (index: number, newText: string) => void;
 };
@@ -29,7 +29,7 @@ const TaskLogs = (props: TaskCountProps) => {
 
             <Checkboxes
               checked={t.done}
-              onAddDoneTask={(checked) => props.onAddDoneTask(i, checked)}
+              onAddDoneTask={(checked) => props.onDoneTask(i, checked)}
             />
             {editingIndex === i ? (
               <input

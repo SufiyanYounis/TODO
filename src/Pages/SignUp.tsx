@@ -1,4 +1,3 @@
-import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { usersignUpSchema, type userSignUpForm } from "../Validation/SignUp";
@@ -12,9 +11,9 @@ const SignUp = () => {
     resolver: yupResolver(usersignUpSchema),
     mode: "onSubmit",
   });
-  const onsubmit: SubmitHandler<userSignUpForm> = (data) => {
-    console.log(data);
-    navigate("/todo");
+  const onsubmit: SubmitHandler<userSignUpForm> = () =>
+  {
+        navigate("/todo");
   };
   const navigate = useNavigate();
   return (
@@ -132,7 +131,7 @@ const SignUp = () => {
                 </label>
                 <input
                   {...register("contact")}
-                  type=""
+                  type="text"
                   aria-invalid={!!errors.contact}
                   className="w-full rounded-xl bg-white/5 px-4 py-3 text-white placeholder-white/50 outline-none ring-1 ring-white/10 focus:ring-2 focus:ring-[#8aad32] transition"
                   placeholder="03xxxxxxxxx"

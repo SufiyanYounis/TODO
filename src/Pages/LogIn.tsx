@@ -1,4 +1,3 @@
-import React from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm, type SubmitHandler } from 'react-hook-form'
 import { userLogInSchema, type userLoginForm } from '../Validation/LogIn'
@@ -12,10 +11,9 @@ const LogIn = () => {
     formState: { errors },
   } = useForm<userLoginForm>({resolver:yupResolver(userLogInSchema), mode:"onSubmit"});  
   
-  const onsubmit:SubmitHandler<userLoginForm> =(data)=>
+  const onsubmit:SubmitHandler<userLoginForm> =()=>
   {
-    console.log(data)
-    navigate("/todo");
+        navigate("/todo");
   }
 
   return (
