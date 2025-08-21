@@ -15,11 +15,6 @@ const App = () => {
     console.log(save)
     return save ? JSON.parse(save) : []
   });
-  //this is a 
-  useEffect(()=>
-  {
-    localStorage.setItem("task",JSON.stringify(tasks));
-  },[tasks])
   //Total task is set equals to the length of task 
   const totalTask = tasks.length;
   //this UseMemo is used to optimize
@@ -39,34 +34,32 @@ const App = () => {
   
     // Add task → append to LS
     const handleAddTask = (text: string) => {
-      const current = getTasksFromStorage();
+      // const current = getTasksFromStorage();
       const newTask = { id: Date.now(), done: false, text };
-      const updated = [...current, newTask];
+      const updated = [...tasks, newTask];
       saveTasksToStorage(updated);
     };
   
     // Toggle done by index
     const handleToggleDone = (index: number) => {
-      const current = getTasksFromStorage();
-      if (current[index]) {
-        current[index].done = !current[index].done;
-        saveTasksToStorage([...current]);
+      if (tasks[index]) {
+        tasks[index].done = !tasks[index].done;
+        saveTasksToStorage([...tasks]);
       }
     };
   
     // Delete by index
     const handleDeleteTask = (index: number) => {
-      const current = getTasksFromStorage();
-      const updated = current.filter((_, i) => i !== index);
+      
+      const updated = tasks.filter((_, i) => i !== index);
       saveTasksToStorage(updated);
     };
   
     // Edit text by index
     const handleEditTask = (index: number, newText: string) => {
-      const current = getTasksFromStorage();
-      if (current[index]) {
-        current[index].text = newText;
-        saveTasksToStorage([...current]);
+      if (tasks[index]) {
+        tasks[index].text = newText;
+        saveTasksToStorage([...tasks]);
       }
     };
 
