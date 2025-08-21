@@ -15,16 +15,12 @@ const App = () => {
     console.log(save)
     return save ? JSON.parse(save) : []
   });
-  //Total task is set equals to the length of task 
+  //Total task is set equals to the length of task
+   
   const totalTask = tasks.length;
+
   //this UseMemo is used to optimize
   const doneTask = useMemo(()=>tasks.reduce((tasksCount,currentTask)=> tasksCount+(currentTask.done?1:0),0),[tasks])
-
-
-  const getTasksFromStorage = ():Task[] => {
-    const saved = localStorage.getItem("task");
-    return saved ? JSON.parse(saved) : [];
-  };
 
     // Helper: save tasks to LS
     const saveTasksToStorage = (updated: Task[]) => {
@@ -34,7 +30,6 @@ const App = () => {
   
     // Add task → append to LS
     const handleAddTask = (text: string) => {
-      // const current = getTasksFromStorage();
       const newTask = { id: Date.now(), done: false, text };
       const updated = [...tasks, newTask];
       saveTasksToStorage(updated);
