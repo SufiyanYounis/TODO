@@ -1,4 +1,3 @@
-import React from "react";
 type TaskCountProps = {
   doneCount: number;
   totalCount: number;

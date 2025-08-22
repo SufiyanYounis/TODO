@@ -1,4 +1,3 @@
-import React from "react";
 import TaskCount from "./TaskCount";
 type TaskCountProps = {
   doneCount: number;
