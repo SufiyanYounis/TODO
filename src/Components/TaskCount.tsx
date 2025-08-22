@@ -1,14 +1,16 @@
 import React from "react";
-type TaskCountProps = {
-  doneCount: number;
-  totalCount: number;
-};
+import { useSelector} from "react-redux";
+import type { RootState } from "../app/store";
 
-const TaskCount = (props: TaskCountProps) => {
+
+const TaskCount = () => {
+  const totalTask = useSelector((state:RootState)=>state.task.totalTask)
+  const doneTask = useSelector((state:RootState)=>state.task.doneTask)
+
   return (
     <div className="circle-container">
       <span className="circle-text">
-        {props.doneCount}/{props.totalCount}
+        {doneTask}/{totalTask}
       </span>
     </div>
   );
