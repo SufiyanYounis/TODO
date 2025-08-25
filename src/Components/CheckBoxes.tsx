@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
-import { Toggle } from "../Features/TaskSlice";
-import type { RootState } from "../app/store";
+import { Toggle } from "@Features/TaskSlice";
+import type { RootState } from "@app/store";
 
 type CheckboxProps=
 {

@@ -5,9 +5,15 @@
     { "path": "./tsconfig.node.json" }
   ],
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "./src",
     "paths": {
-      "@/*": ["src/*"]
+      "@Components/*": ["Components/*"],
+      "@Pages/*": ["Pages/*"],
+      "@assets/*": ["assets/*"],
+      "@Validation/*": ["Validation/*"],
+      "@Features/*": ["Features/*"],
+      "@app/*": ["app/*"],
+      "@middleware/*": ["middleware/*"],
     }
   }
 }

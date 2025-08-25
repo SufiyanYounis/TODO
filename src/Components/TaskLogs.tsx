@@ -1,10 +1,10 @@
 import { useState} from "react";
 import Checkboxes from "./CheckBoxes";
-import EditTaskButtonSvg from "../assets/icons/EditTaskButtonSvg";
-import DeleteTaskButtonSvg from "../assets/icons/DeleteTaskButtonSvg";
+import EditTaskButtonSvg from "@assets/icons/EditTaskButtonSvg";
+import DeleteTaskButtonSvg from "@assets/icons/DeleteTaskButtonSvg";
 import { useSelector,useDispatch } from "react-redux";
-import type { RootState } from "../app/store";
-import { EditTask, DeleteTask } from "../Features/TaskSlice";;
+import type { RootState } from "@app/store";
+import { EditTask, DeleteTask } from "@Features/TaskSlice";;
 
 
 const TaskLogs = () => {

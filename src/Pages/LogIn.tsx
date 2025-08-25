@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm, type SubmitHandler } from 'react-hook-form'
-import { userLogInSchema, type userLoginForm } from '../Validation/LogIn'
+import { userLogInSchema, type userLoginForm } from '@Validation/LogIn'
 import { yupResolver } from '@hookform/resolvers/yup'
 const LogIn = () => {
   const navigate = useNavigate();

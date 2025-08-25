@@ -1,8 +1,8 @@
 
 import { useState } from "react";
-import AddTaskButtonSvg from "../assets/icons/AddTaskButtonSvg";
+import AddTaskButtonSvg from "@assets/icons/AddTaskButtonSvg";
 import { useDispatch } from "react-redux";
-import { addTask } from "../Features/TaskSlice";
+import { addTask } from "@Features/TaskSlice";
 
 export const TaskWrite = () => {
 

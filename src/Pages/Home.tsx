@@ -1,5 +1,5 @@
-import Heading from '../Components/Heading'
-import TaskDone from '../Components/TaskDone'
+import Heading from '@Components/Heading'
+import TaskDone from '@Components/TaskDone'
 import { useNavigate } from 'react-router-dom'
 
 

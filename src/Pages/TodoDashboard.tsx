@@ -1,10 +1,10 @@
-import TaskWrite from "../Components/TaskWrite";
-import Messages from "../Components/Messages";
-import TaskLogs from "../Components/TaskLogs";
-import Heading from '../Components/Heading';
-import TaskDone from "../Components/TaskDone";
+import TaskWrite from "@Components/TaskWrite";
+import Messages from "@Components/Messages";
+import TaskLogs from "@Components/TaskLogs";
+import Heading from '@Components/Heading';
+import TaskDone from "@Components/TaskDone";
 import { useSelector } from "react-redux";
-import type { RootState } from "../app/store";
+import type { RootState } from "@app/store";
 
 
 const TodoDashboard = () => {
