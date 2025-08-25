@@ -1,9 +1,7 @@
 import TaskCount from "./TaskCount";
-type TaskCountProps = {
-  doneCount: number;
-  totalCount: number;
-};
-const TaskDone = (props: TaskCountProps) => {
+
+const TaskDone = () => {
+ 
   return (
     <div className="TaskDiv">
       <div className="MidTaskDiv">
@@ -11,8 +9,7 @@ const TaskDone = (props: TaskCountProps) => {
           <p id="MainTaskText">Task Done</p>
           <p id="TaskText">Keep it up</p>
         </div>
-
-        <TaskCount doneCount={props.doneCount} totalCount={props.totalCount} />
+        <TaskCount />
       </div>
     </div>
   );

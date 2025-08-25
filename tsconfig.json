@@ -11,6 +11,10 @@
       "@Pages/*": ["Pages/*"],
       "@assets/*": ["assets/*"],
       "@Validation/*": ["Validation/*"],
+      "@Features/*": ["Features/*"],
+      "@app/*": ["app/*"],
+      "@middleware/*": ["middleware/*"],
+
     }
   }
 }
