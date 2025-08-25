@@ -1,19 +1,23 @@
-import TaskWrite from "@/Components/TaskWrite";
-import Messages from "@/Components/Messages";
-import TaskLogs from "@/Components/TaskLogs";
-import Heading from '@/Components/Heading';
-import TaskDone from "@/Components/TaskDone";
-import { useState, useMemo } from "react";
+import TaskWrite from "@Components/TaskWrite";
+import Messages from "@Components/Messages";
+import TaskLogs from "@Components/TaskLogs";
+import Heading from "@Components/Heading";
+import TaskDone from "@Components/TaskDone";
+import {useMemo } from "react";
 
-type Task = { id: number; done: boolean; text: string };
+interface Task {
+  id: number;
+  done: boolean;
+  text: string;
+}
+type TodoProps = {
+  tasks: Task[];
+  setTask: (updated: Task[]) => void;
+};
 
-const TodoDashboard = () => {
-  const [tasks, setTasks] = useState<Task[]>(() => {
-    const save = localStorage.getItem("task");
-    return save ? JSON.parse(save) : [];
-  });
-
-
+const TodoDashboard = (props: TodoProps) => {
+  const tasks = props.tasks;
+  const setTasks = props.setTask;
   const totalTask = tasks.length;
 
   //this UseMemo is used to optimize
@@ -61,24 +65,23 @@ const TodoDashboard = () => {
     }
   };
 
-
   return (
     <>
       <Heading />
       <TaskDone doneCount={doneTask} totalCount={totalTask} />
-    <TaskWrite onAddTotalTask={handleAddTask} />
-    {totalTask > 0 ? (
-      <TaskLogs
-        tasks={tasks}
-        onDoneTask={handleToggleDone}
-        onDeleteTask={handleDeleteTask}
-        onEditTask={handleEditTask}
-      />
-    ) : (
-      <Messages />
-    )}
+      <TaskWrite onAddTotalTask={handleAddTask} />
+      {totalTask > 0 ? (
+        <TaskLogs
+          tasks={tasks}
+          onDoneTask={handleToggleDone}
+          onDeleteTask={handleDeleteTask}
+          onEditTask={handleEditTask}
+        />
+      ) : (
+        <Messages />
+      )}
     </>
-  )
-}
+  );
+};
 
-export default TodoDashboard
+export default TodoDashboard;

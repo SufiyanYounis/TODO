@@ -1,7 +1,7 @@
-import { useState} from "react";
+import { useState } from "react";
 import Checkboxes from "./CheckBoxes";
-import EditTaskButtonSvg from "@/assets/icons/EditTaskButtonSvg";
-import DeleteTaskButtonSvg from "@/assets/icons/DeleteTaskButtonSvg";
+import EditTaskButtonSvg from "@assets/icons/EditTaskButtonSvg";
+import DeleteTaskButtonSvg from "@assets/icons/DeleteTaskButtonSvg";
 
 //this the the properties of the TaskLogs
 
@@ -37,8 +37,10 @@ const TaskLogs = (props: TaskCountProps) => {
                 value={draft}
                 onChange={(e) => {
                   setDraft(e.target.value);
-                  localStorage.setItem("edit-draft", JSON.stringify(e.target.value));
-
+                  localStorage.setItem(
+                    "edit-draft",
+                    JSON.stringify(e.target.value)
+                  );
                 }}
                 onBlur={() => {
                   props.onEditTask(i, draft.trim());
