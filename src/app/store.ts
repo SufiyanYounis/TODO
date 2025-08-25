@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import taskReducer from "../Features/TaskSlice"
-import { localStorageMiddleware } from "@/middleware/LocalStorage";
+import taskReducer from "@Features/TaskSlice"
+import { localStorageMiddleware } from "@middleware/LocalStorage";
 
 
 const preloadedState = () => {
