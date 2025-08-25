@@ -22,7 +22,7 @@ const TodoDashboard = () => {
       <Messages />
     )}
     </>
-  )
-}
+  );
+};
 
-export default TodoDashboard
+export default TodoDashboard;

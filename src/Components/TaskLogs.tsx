@@ -6,7 +6,6 @@ import { useSelector,useDispatch } from "react-redux";
 import type { RootState } from "@app/store";
 import { EditTask, DeleteTask } from "@Features/TaskSlice";;
 
-
 const TaskLogs = () => {
   //these are my React Hooks that are use to manage the states of Task Log Components
 
@@ -30,12 +29,11 @@ const TaskLogs = () => {
             />
             {editingIndex === i ? (
               <input
+              autoFocus
                 className="EditInput"
                 value={draft}
                 onChange={(e) => {
-                  setDraft(e.target.value);
-                  // localStorage.setItem("edit-draft", JSON.stringify(e.target.value));
-
+                  setDraft(e.target.value)
                 }}
                 onBlur={() => {
                 dispatch(EditTask({ id : arr_obj.id , text : draft.trim()}))

@@ -6,6 +6,7 @@ import { addTask } from "@Features/TaskSlice";
 
 export const TaskWrite = () => {
 
+
   const [text, setText] = useState("");
 
   const dispatch= useDispatch()
@@ -28,7 +29,8 @@ export const TaskWrite = () => {
       <button
         className="addTaskButton"
         onClick={handleAddClick}
-        disabled={text.trim() === "" }
+        disabled={text.trim() === ""}
+        style={{ opacity: text.trim() === "" ? 0.5 : 1 ,cursor: text.trim() === "" ? "not-allowed" : "pointer"}}
       >
         <AddTaskButtonSvg />
       </button>
