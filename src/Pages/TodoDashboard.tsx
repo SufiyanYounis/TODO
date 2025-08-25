@@ -12,12 +12,11 @@ interface Task {
 }
 type TodoProps = {
   tasks: Task[];
-  setTask: (updated: Task[]) => void;
+  setTasks: (updated: Task[]) => void;
 };
 
 const TodoDashboard = (props: TodoProps) => {
-  const tasks = props.tasks;
-  const setTasks = props.setTask;
+  const {tasks,setTasks} = props
   const totalTask = tasks.length;
 
   //this UseMemo is used to optimize
