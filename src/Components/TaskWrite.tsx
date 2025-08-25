@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import { useState } from "react";
 import AddTaskButtonSvg from "../assets/icons/AddTaskButtonSvg";
 type AddButtonProps = {
   onAddTotalTask: (text: string) => void;
@@ -23,7 +23,7 @@ export const TaskWrite = (props: AddButtonProps) => {
       <button
         className="addTaskButton"
         onClick={handleAddClick}
-        disabled={text.trim() === ""}
+        disabled={text.trim() === "" }
       >
         <AddTaskButtonSvg />
       </button>

@@ -1,13 +1,13 @@
-import { useState , useEffect} from "react";
+import { useState } from "react";
 import Checkboxes from "./CheckBoxes";
-import EditTaskButtonSvg from "../assets/icons/EditTaskButtonSvg";
-import DeleteTaskButtonSvg from "../assets/icons/DeleteTaskButtonSvg";
+import EditTaskButtonSvg from "@assets/icons/EditTaskButtonSvg";
+import DeleteTaskButtonSvg from "@assets/icons/DeleteTaskButtonSvg";
 
 //this the the properties of the TaskLogs
 
 type TaskCountProps = {
   tasks: { id: number; text: string; done: boolean }[];
-  onAddDoneTask: (index: number, checked: boolean) => void;
+  onDoneTask: (index: number, checked: boolean) => void;
   onDeleteTask: (index: number) => void;
   onEditTask: (index: number, newText: string) => void;
 };
@@ -29,7 +29,7 @@ const TaskLogs = (props: TaskCountProps) => {
 
             <Checkboxes
               checked={t.done}
-              onAddDoneTask={(checked) => props.onAddDoneTask(i, checked)}
+              onAddDoneTask={(checked) => props.onDoneTask(i, checked)}
             />
             {editingIndex === i ? (
               <input
@@ -37,8 +37,10 @@ const TaskLogs = (props: TaskCountProps) => {
                 value={draft}
                 onChange={(e) => {
                   setDraft(e.target.value);
-                  localStorage.setItem("edit-draft", JSON.stringify(e.target.value));
-
+                  localStorage.setItem(
+                    "edit-draft",
+                    JSON.stringify(e.target.value)
+                  );
                 }}
                 onBlur={() => {
                   props.onEditTask(i, draft.trim());
