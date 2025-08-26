@@ -1,5 +1,3 @@
-import React from "react";
-
 const DeleteTaskButtonSvg = () => {
   return (
     <svg

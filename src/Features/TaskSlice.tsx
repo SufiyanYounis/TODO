@@ -1,41 +1,41 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
-type tasks = {
+type Task = {
   id: number;
   text: string;
   done: boolean;
 };
 type TasksState = {
-  items: tasks[];
+  tasks: Task[];
   doneTasks: number;
   totalTasks: number;
 };
 
-const initialState: TasksState = { items: [], doneTasks: 0, totalTasks: 0 };
+const initialState: TasksState = { tasks: [], doneTasks: 0, totalTasks: 0 };
 const taskSlice = createSlice({
   name: "task",
   initialState,
   reducers: {
-    addTask(state, action: PayloadAction<tasks>) {
-      state.items.push(action.payload);
+    addTask(state, action: PayloadAction<Task>) {
+      state.tasks.push(action.payload);
       state.totalTasks += 1;
     },
     DeleteTask(state, action: PayloadAction<number>) {
-      const toDelete = state.items.find((obj) => obj.id === action.payload);
+      const toDelete = state.tasks.find((obj) => obj.id === action.payload);
       if (toDelete?.done) {
         state.doneTasks -= 1;
       }
-      state.items = state.items.filter((obj) => obj.id !== action.payload);
+      state.tasks = state.tasks.filter((obj) => obj.id !== action.payload);
       state.totalTasks -= 1;
     },
     EditTask(state, action: PayloadAction<{ id: number; text: string }>) {
-      const updated_arr = state.items.find(
+      const updated_arr = state.tasks.find(
         (obj) => obj.id === action.payload.id
       );
       if (updated_arr) updated_arr.text = action.payload.text;
     },
     Toggle(state, action: PayloadAction<number>) {
-      const updated_arr = state.items.find((obj) => obj.id === action.payload);
+      const updated_arr = state.tasks.find((obj) => obj.id === action.payload);
       if (updated_arr) updated_arr.done = !updated_arr.done;
       if (updated_arr?.done) state.doneTasks += 1;
       else state.doneTasks -= 1;

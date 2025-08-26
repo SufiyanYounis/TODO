@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
-import { Toggle } from "@Features/TaskSlice";
 import type { RootState } from "@app/store";
+import { Toggle } from "@Features/TaskSlice";
 
 type CheckboxProps=
 {
@@ -10,7 +10,7 @@ type CheckboxProps=
 const Checkboxes = (props:CheckboxProps) => {
   const dispatch = useDispatch();
   const checked = useSelector(
-    (state: RootState) => state.task.items.find(obj => obj.id === props.id)?.done
+    (state: RootState) => state.task.tasks.find(obj => obj.id === props.id)?.done
   );
   return (
     <label className="custom-checkbox" >
