@@ -1,24 +1,20 @@
-import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import {Routes, Route } from "react-router-dom";
 import TodoDashboard from "@Pages/TodoDashboard";
 import LogIn from "@Pages/LogIn";
 import SignUp from "@Pages/SignUp";
 import Home from "@Pages/Home";
-import { useState } from "react";
-
-type Task = { id: number; done: boolean; text: string };
-
+import "./App.css";
 const App = () => {
-  // one global use State hook
-  const [tasks, setTasks] = useState<Task[]>(() => {
-    const save = localStorage.getItem("task");
-    return save ? JSON.parse(save) : [];
-  });
 
   return (
     <Routes>
       {/* Root path  */}
-      <Route path="/" index={true} element={<Home tasks={tasks} />} />
+      <Route
+        path="/"
+        index={true}
+        element={<Home/>}
+      />
+
       {/* LogIn path  */}
       <Route path="/login" element={<LogIn />} />
 
@@ -29,10 +25,11 @@ const App = () => {
 
       <Route
         path="/todo"
-        element={<TodoDashboard tasks={tasks} setTask={setTasks} />}
+        element={
+          <TodoDashboard/>
+        }
       />
     </Routes>
   );
-};
-
+}
 export default App;

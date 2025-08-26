@@ -152,6 +152,8 @@ body
   padding: 16px 14px;
   background-color: #1F2937;
   color: white;
+  outline: none
+  
 }
 
 
@@ -163,7 +165,7 @@ body
   display: flex; /* Enables flexbox for easy centering */
   justify-content: center; /* Centers horizontally */
   align-items: center; /* Centers vertically */
-  margin-left:3%;
+  margin-left:10%;
 }
 
 .circle-text {
@@ -236,6 +238,8 @@ body
 
 .EditInput {
   flex: 1;
+  display: inline;
+  background-color: #5BC560;
   min-width: 0;
   background: transparent;
   border: none;
