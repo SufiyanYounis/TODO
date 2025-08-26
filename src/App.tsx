@@ -1,9 +1,9 @@
-import "./App.css";
 import {Routes, Route } from "react-router-dom";
 import TodoDashboard from "@Pages/TodoDashboard";
 import LogIn from "@Pages/LogIn";
 import SignUp from "@Pages/SignUp";
 import Home from "@Pages/Home";
+import "./App.css";
 const App = () => {
 
   return (

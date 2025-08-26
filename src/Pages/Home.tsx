@@ -1,6 +1,7 @@
+import { useNavigate } from 'react-router-dom'
 import Heading from '@Components/Heading'
 import TaskDone from '@Components/TaskDone'
-import { useNavigate } from 'react-router-dom'
+
 
 
 const Home = () => {

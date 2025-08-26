@@ -1,10 +1,11 @@
 import { useState} from "react";
-import Checkboxes from "./CheckBoxes";
-import EditTaskButtonSvg from "@assets/icons/EditTaskButtonSvg";
-import DeleteTaskButtonSvg from "@assets/icons/DeleteTaskButtonSvg";
 import { useSelector,useDispatch } from "react-redux";
 import type { RootState } from "@app/store";
-import { EditTask, DeleteTask } from "@Features/TaskSlice";;
+import { EditTask, DeleteTask } from "@Features/TaskSlice";
+import EditTaskButtonSvg from "@assets/icons/EditTaskButtonSvg";
+import DeleteTaskButtonSvg from "@assets/icons/DeleteTaskButtonSvg";
+import Checkboxes from "./CheckBoxes";
+
 
 const TaskLogs = () => {
   //these are my React Hooks that are use to manage the states of Task Log Components
@@ -13,7 +14,7 @@ const TaskLogs = () => {
 
   const [draft, setDraft] = useState("");
 
-  const tasks = useSelector((state:RootState)=> state.task.items);
+  const tasks = useSelector((state:RootState)=> state.task.tasks);
   const dispatch = useDispatch();
 
   return (
