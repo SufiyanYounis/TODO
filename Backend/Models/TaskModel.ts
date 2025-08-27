@@ -3,7 +3,8 @@ import mongoose  from "mongoose";
 
 const taskSchema = new mongoose.Schema({
 
-  text: {
+  text: 
+  {
     type: String,
     trim: true
   },
@@ -15,15 +16,7 @@ const taskSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId, // Reference to User model
     ref: 'User',
     required: true
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now
-  },
-  updatedAt: {
-    type: Date,
-    default: Date.now
   }
-});
+},{timestamps:true});
 
 export default mongoose.model('Task', taskSchema);

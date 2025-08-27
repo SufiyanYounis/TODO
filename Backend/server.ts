@@ -1,14 +1,15 @@
 import express from "express";
-import { connectDB } from "./src/config/db.ts";
+import { connectDB } from "./config/db";
 import cors from "cors";
-
+import TaskRoutes from "@Routes/TodoRoutes";
+import UserRoutes from "@Routes/UserRoutes";
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.get("/" , (_,res)=>
-{
-    res.send("Todo APP")
-});
+
+app.use("/",TaskRoutes);
+app.use("/",UserRoutes);
+
 app.listen(3000,()=>
 {
     connectDB();
