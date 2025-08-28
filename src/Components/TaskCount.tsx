@@ -3,7 +3,7 @@ import type { RootState } from "@app/store";
 
 const TaskCount = () => {
   const totalTask = useSelector((state:RootState)=>state.task.totalTasks)
-  const doneTask = useSelector((state:RootState)=>state.task.doneTasks)
+  const doneTask = useSelector((state:RootState)=>state.task.totalDoneTasks)
 
   return (
     <div className="circle-container">

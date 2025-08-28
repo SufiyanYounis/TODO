@@ -1,7 +1,7 @@
 import { useState} from "react";
 import { useSelector,useDispatch } from "react-redux";
 import type { RootState } from "@app/store";
-import { EditTask, DeleteTask } from "@Features/TaskSlice";
+import { editTaskRequested, deleteTaskRequested , fetchTasksRequested} from "@Features/TaskSlice";
 import EditTaskButtonSvg from "@assets/icons/EditTaskButtonSvg";
 import DeleteTaskButtonSvg from "@assets/icons/DeleteTaskButtonSvg";
 import Checkboxes from "./CheckBoxes";
@@ -16,17 +16,18 @@ const TaskLogs = () => {
 
   const tasks = useSelector((state:RootState)=> state.task.tasks);
   const dispatch = useDispatch();
+  
 
   return (
     <>
       {/*iterating over each task with their specific id and text */}
       {tasks.map((arr_obj, i) => (
-        <div className="Tasklogs" key={arr_obj.id}>
+        <div className="Tasklogs" key={arr_obj._id}>
           <div className="Logs">
             {/*Toggling each Checkbox with its index so that only the single checkbox is toggled */}
 
             <Checkboxes
-              id={arr_obj.id}
+            _id={arr_obj._id}
             />
             {editingIndex === i ? (
               <input
@@ -37,15 +38,15 @@ const TaskLogs = () => {
                   setDraft(e.target.value)
                 }}
                 onBlur={() => {
-                dispatch(EditTask({ id : arr_obj.id , text : draft.trim()}))
+                dispatch(editTaskRequested({ _id : arr_obj._id , text : draft.trim()}))
                   setEditingIndex(null);
                 }}
               />
             ) : (
               <span
                 className="TextMessage"
-                key={arr_obj.id}
-                style={{ textDecoration: arr_obj.done ? "line-through" : "none" }}
+                key={arr_obj._id}
+                style={{ textDecoration: arr_obj.completed ? "line-through" : "none" }}
               >
                 {arr_obj.text}
               </span>
@@ -59,7 +60,7 @@ const TaskLogs = () => {
               >
                 <EditTaskButtonSvg />
               </div>
-              <div onClick={() =>dispatch(DeleteTask(arr_obj.id))}>
+              <div onClick={() =>dispatch(deleteTaskRequested({ _id : arr_obj._id }))}>
                 <DeleteTaskButtonSvg />
               </div>
             </div>

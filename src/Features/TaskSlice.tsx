@@ -1,47 +1,127 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
-type Task = {
-  id: number;
+export type Task = {
+  _id: string;
   text: string;
-  done: boolean;
+  completed: boolean;
 };
 type TasksState = {
   tasks: Task[];
-  doneTasks: number;
+  totalDoneTasks: number;
   totalTasks: number;
+  loading: boolean;
+  error: string;
 };
 
-const initialState: TasksState = { tasks: [], doneTasks: 0, totalTasks: 0 };
+const initialState: TasksState = {
+  tasks: [],
+  totalDoneTasks: 0,
+  totalTasks: 0,
+  loading: false,
+  error: "",
+};
 const taskSlice = createSlice({
   name: "task",
   initialState,
   reducers: {
-    addTask(state, action: PayloadAction<Task>) {
-      state.tasks.push(action.payload);
-      state.totalTasks += 1;
+    fetchTasksRequested(state) {
+      state.loading = true;
     },
-    DeleteTask(state, action: PayloadAction<number>) {
-      const toDelete = state.tasks.find((obj) => obj.id === action.payload);
-      if (toDelete?.done) {
-        state.doneTasks -= 1;
+    fetchTasksSuccess(state, action: PayloadAction<Task[]>) {
+      state.loading = false;
+      state.tasks = action.payload;
+      state.totalTasks = action.payload.length;
+      state.totalDoneTasks = action.payload.filter((task) => task.completed).length;
+    },
+
+    fetchTasksFailed(state, action: PayloadAction<string>) {
+      state.loading = false;
+      state.error = action.payload;
+    },
+
+    addTaskRequested(
+      state,
+      action:PayloadAction<{text:string}>
+    ) 
+    {
+      console.log("went to add Task Requested")
+      state.loading=true
+    },
+    addTaskSuccess(state, action: PayloadAction<{text:string,completed:boolean,_id:string}>) {
+      console.log("went to add Task Success")
+      state.loading=false
+      state.tasks.push(action.payload)
+      state.totalTasks++
+    },
+    addTaskFailed(state, action: PayloadAction<string>) {
+      console.log("went to add Task Failed")
+      state.loading=false;
+      state.error=action.payload;
+    },
+    editTaskRequested(
+      state,
+      action:PayloadAction<{_id:string,text:string}>
+    ) {
+      state.loading = true;
+    },
+    editTaskSuccess(state, action: PayloadAction<Task>) {
+      state.loading = false;
+      // it iterates towards the map and if the id matches then it updates the task for that id
+      state.tasks = state.tasks.map(task => task._id === action.payload._id ? action.payload : task)
+    },
+    editTaskFailed(state, action: PayloadAction<string>) {
+      state.loading = false;
+      state.error = action.payload;
+    },
+    deleteTaskRequested(state, action: PayloadAction<{ _id: string }>) {
+      state.loading = true;
+    },
+    deleteTaskSuccess(state, action: PayloadAction<{ _id: string }>) {
+      state.loading = false;
+      state.tasks = state.tasks.filter(task => task._id !== action.payload._id)
+      state.totalTasks--;
+    },
+    deleteTaskFailed(state, action: PayloadAction<string>) {
+      state.loading = false;
+      state.error = action.payload;
+    },
+    toggleTaskRequest(state , action: PayloadAction<{_id:string, completed:boolean}>) {
+      state.loading = true;
+    },
+    toggleTaskSuccess(state , action: PayloadAction<{_id:string, completed:boolean}>) {
+      state.loading = false;
+      state.tasks = state.tasks.map(task => task._id === action.payload._id ? {...task,completed:action.payload.completed} : task)
+      if(action.payload.completed)
+      {
+        state.totalDoneTasks++;
       }
-      state.tasks = state.tasks.filter((obj) => obj.id !== action.payload);
-      state.totalTasks -= 1;
+      else
+      {
+        state.totalDoneTasks--;
+      }
     },
-    EditTask(state, action: PayloadAction<{ id: number; text: string }>) {
-      const updated_arr = state.tasks.find(
-        (obj) => obj.id === action.payload.id
-      );
-      if (updated_arr) updated_arr.text = action.payload.text;
-    },
-    Toggle(state, action: PayloadAction<number>) {
-      const updated_arr = state.tasks.find((obj) => obj.id === action.payload);
-      if (updated_arr) updated_arr.done = !updated_arr.done;
-      if (updated_arr?.done) state.doneTasks += 1;
-      else state.doneTasks -= 1;
+    toggleTaskFailed(state , action: PayloadAction<string>) {
+      state.loading = false;
+      state.error = action.payload;
     },
   },
 });
 
-export const { addTask, DeleteTask, EditTask, Toggle } = taskSlice.actions;
+export const {
+  fetchTasksRequested,
+  fetchTasksSuccess,
+  fetchTasksFailed,
+  addTaskRequested,
+  addTaskSuccess,
+  addTaskFailed,
+  editTaskRequested,
+  editTaskSuccess,
+  editTaskFailed,
+  deleteTaskRequested,
+  deleteTaskSuccess,
+  deleteTaskFailed,
+  toggleTaskRequest,
+  toggleTaskSuccess,
+  toggleTaskFailed  
+} = taskSlice.actions;
 export default taskSlice.reducer;

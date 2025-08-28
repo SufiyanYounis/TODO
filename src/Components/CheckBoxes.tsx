@@ -1,20 +1,21 @@
 import { useDispatch, useSelector } from "react-redux"
 import type { RootState } from "@app/store";
-import { Toggle } from "@Features/TaskSlice";
+import { toggleTaskRequest } from "@Features/TaskSlice";
 
 type CheckboxProps=
 {
-  id:number
+  _id:string
 }
 
 const Checkboxes = (props:CheckboxProps) => {
   const dispatch = useDispatch();
   const checked = useSelector(
-    (state: RootState) => state.task.tasks.find(obj => obj.id === props.id)?.done
+    (state: RootState) => state.task.tasks.find(obj => obj._id === props._id)?.completed
   );
+  const isChecked = Boolean(checked)
   return (
     <label className="custom-checkbox" >
-    <input type="checkbox" onClick={()=>dispatch(Toggle(props.id))} checked={checked} />
+    <input type="checkbox" onClick={()=>dispatch(toggleTaskRequest({_id:props._id, completed:!isChecked}))} checked={isChecked} />
     <span className="checkmark"></span>
   </label>
   )

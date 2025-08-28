@@ -1,22 +1,18 @@
 import mongoose from "mongoose";
 import { Request, Response } from "express";
 import Tasks from "@Models/TaskModel"
-import { Error } from "mongoose";
 
 const createTask = async (req : Request, res :Response)=>
 {
     try {
-        const { text, userId } = req.body as { text: string; userId: string };
-    
+        const { text, userId } = req.body as { text: string; userId?: string };
+        const payload: any = { text, completed: false };
+        if (userId) payload.userId = userId;
         // create the task with both fields
-        const newTask = new Tasks({
-          text,
-          userId,  // 👈 required by your schema
-          completed: false, // optional if your schema has default
-        });
+        const newTask = new Tasks(payload);
     
         await newTask.save();
-        res.status(201).json({success : true, message:" task created successfully"});
+        res.status(201).json({success : true, data:newTask , message:" task created successfully"});
       } catch (error: unknown) {
         console.log(error);
         res.status(500).json({ error: "Failed to create task" });
@@ -75,5 +71,29 @@ const deleteTask = async (req : Request, res :Response) =>
         }
     }
 
+const toggleTask = async (req:Request ,res:Response) =>
+{
+    const id = req.params.id
+    try{
+        if (! mongoose.Types.ObjectId.isValid(id))
+        {
+            res.status(404).json({ success:false,error: "Invalid task ID" });
+        }
+        const tasks = await Tasks.findById(id)
+        if(!tasks)
+        {
+            return res.status(404).json({ success:false,error: "Task not found" });
+        }
+        tasks.completed = !tasks.completed
+        await tasks.save()
+        res.status(200).json({success:true,data:tasks,message:"Task toggle successfully"})
+    }
+    catch(error)
+    {
+        console.log(error)
+        res.status(500).json({ success:false, error: "Failed to toggle task" });
+    }
+}
 
-export {createTask,getTasks,updateTask,deleteTask}
+
+export {createTask,getTasks,updateTask,deleteTask,toggleTask}

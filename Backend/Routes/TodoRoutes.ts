@@ -1,10 +1,11 @@
 import express from "express";
-import {createTask,getTasks,updateTask,deleteTask} from "@Controllers/TaskController"
+import {createTask,getTasks,updateTask,deleteTask,toggleTask} from "@Controllers/TaskController"
 const router = express.Router();
-router.post("/tasks",createTask);
-router.get("/tasks",getTasks);
-router.put("/tasks/:id",updateTask);
-router.delete("/tasks/:id",deleteTask);
+router.post("/todo",createTask);
+router.get("/todo",getTasks);
+router.put("/todo/:id",updateTask);
+router.patch("/todo/:id/toggle",toggleTask)
+router.delete("/todo/:id",deleteTask);
 export default router;
 
 
