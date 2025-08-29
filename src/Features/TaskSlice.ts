@@ -44,17 +44,14 @@ const taskSlice = createSlice({
       action:PayloadAction<{text:string}>
     ) 
     {
-      console.log("went to add Task Requested")
       state.loading=true
     },
     addTaskSuccess(state, action: PayloadAction<{text:string,completed:boolean,_id:string}>) {
-      console.log("went to add Task Success")
       state.loading=false
       state.tasks.push(action.payload)
       state.totalTasks++
     },
     addTaskFailed(state, action: PayloadAction<string>) {
-      console.log("went to add Task Failed")
       state.loading=false;
       state.error=action.payload;
     },
