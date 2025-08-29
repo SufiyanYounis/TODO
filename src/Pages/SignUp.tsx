@@ -11,9 +11,28 @@ const SignUp = () => {
     resolver: yupResolver(usersignUpSchema),
     mode: "onSubmit",
   });
-  const onsubmit: SubmitHandler<userSignUpForm> = () =>
+  const onsubmit: SubmitHandler<userSignUpForm> = async(data) =>
   {
-        navigate("/todo");
+    try{
+      const res = await fetch("http://localhost:3000/signup",{
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify(data)
+      })
+      const result = await res.json();
+      if (res.ok) {
+        console.log("User created:", result);
+        navigate("/todo"); // redirect after success
+      } else {
+        console.log(result.error || "Failed to register user");
+      }
+    }
+    catch(error)
+    {
+      console.log(error)
+    }
   };
   const navigate = useNavigate();
   return (
@@ -30,7 +49,7 @@ const SignUp = () => {
               Join us and keep your tasks beautifully organized.
             </p>
 
-            <form className="mt-6 space-y-4" onSubmit={handleSubmit(onsubmit)}>
+            <form className="mt-6 space-y-4" onSubmit={handleSubmit(onsubmit)} >
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="mb-1 block text-sm text-white/80">

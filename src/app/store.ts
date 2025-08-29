@@ -1,18 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { localStorageMiddleware } from "@middleware/LocalStorage";
 import taskReducer from "@Features/TaskSlice"
-
-
-const preloadedState = () => {
-    try {
-      const data = localStorage.getItem("Tasks");
-      if (data === null) return undefined;
-      return { task: JSON.parse(data) };
-    } catch (err) {
-      return undefined;
-    }
-  };
-
+import createSagaMiddleware from "redux-saga";
+import rootSaga from "./index";
+const sagaMiddleware = createSagaMiddleware();
 
 
 export const store = configureStore(
@@ -21,11 +11,10 @@ export const store = configureStore(
             task:taskReducer
         },
         middleware: (getDefaultMiddleware) =>
-            getDefaultMiddleware().concat(localStorageMiddleware),
-          preloadedState: preloadedState(),
+            getDefaultMiddleware({thunk:false}).concat(sagaMiddleware)
     }
-    
 )
+sagaMiddleware.run(rootSaga)
 
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch

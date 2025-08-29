@@ -14,7 +14,7 @@
       "@Features/*": ["Features/*"],
       "@app/*": ["app/*"],
       "@middleware/*": ["middleware/*"],
-
+      "@saga/*": ["saga/*"]
     }
   }
 }
